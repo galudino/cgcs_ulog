@@ -29,7 +29,13 @@ int main(int argc, const char *argv[]) {
     ERROR(__FILE__, "test");
     WARNING(__FILE__, "test");
 
-    massert(argc == 5, "argc not 5");
+    // You can use more than one color code at a time,
+    // but make sure to end your string with a KNRM macro --
+    // or else subsequent printouts in your stream will still
+    // have your previous setting!
+    printf("%s\n", KGRN"Look at me, I'm green!"KNRM);
 
+    int x = 4;
+    massert(x == 5, "x must be equal to 5");
     return 0;
 }
