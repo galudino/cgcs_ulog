@@ -206,22 +206,22 @@ extern bool ulog_attrs_disable[UTILS_LOG_ATTRS_COUNT];
     Then, just like the assert macro, abort() is invoked
     and the program ends.
  
-    Unlike the original assert macro,
-    NDEBUG will not disable massert - massert
-    will persist whether you are in debug mode, or release mode.
- 
     massert is most useful when a program is no longer fit
     to continue, given a particular condition --
     a description message of your choice can be provided.
  
     If no message is preferred, you may provide an empty string.
  */
+#ifndef NDEBUG
 #define massert(CONDITION, MESSAGE)\
-if (!(CONDITION)) {\
-    fprintf(stderr, "Assertion failed: (%s)\n", #CONDITION);\
-    ERROR(__FILE__, (MESSAGE));\
-    abort();\
-}
+    if (!(CONDITION)) {\
+        fprintf(stderr, "Assertion failed: (%s)\n", #CONDITION);\
+        ERROR(__FILE__, MESSAGE);\
+        abort();\
+    }
+#else
+#define massert(CONDITION, MESSAGE) 
+#endif /* massert(CONDITION, MESSAGE) */
 
 #define massert_ptr(PTR);\
 massert(PTR, "['"#PTR"' was found to be NULL - '"#PTR"' must be nonnull to continue.]");
