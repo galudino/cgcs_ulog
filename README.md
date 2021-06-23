@@ -3,11 +3,45 @@
 
 Note:
 Repository under construction.<br>
-`CMakeLists.txt` is planned for this submodule.
 
-For now, you may simply bring `cgcs_ulog.h` and `cgcs_ulog.c` 
-and use it among your other sources within your project.
-In the future, you will be able to use this repository as a submodule.
+## Building:
+
+Run the included `makebuilds` script to have `cmake`<br>
+create Unix-Makefile builds in the following modes:
+- `Debug`
+- `Release`
+- `MinSizeRel`
+- `RelWithDebInfo`
+
+```
+% ./makebuilds
+```
+
+A `build/make` subdirectory will be created with subdirectories<br>
+of the modes described above. 
+
+If we want to create a `Debug` build
+of our demo program (which will also build the `cgcs_ulog` library):
+
+```
+make -C ./build/make/Debug/demo
+```
+
+Generally,
+```
+make -C ./build/make/[build-mode]/[target-name]
+```
+
+If you want to use an alternative build system, i.e. Xcode or Visual Studio<br>
+(see the list of supported generators on your system using `cmake -help`), invoke the following:
+```
+% cmake -S ./ -B ./build/[generator-name] -G "[generator-name]"
+```
+
+For example, for Xcode:
+```
+% cmake -S ./ -B ./build/xcode -G "Xcode"
+```
 
 ## The `ulog` function
 
