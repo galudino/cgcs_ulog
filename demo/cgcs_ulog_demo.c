@@ -1,5 +1,5 @@
 /*!
-    \file       cgcs_ulog_test.c
+    \file       cgcs_ulog_demo.c
     \brief      Test source file for cgcs_ulog
 
     \author     Gemuele Aludino
